@@ -1,0 +1,33 @@
+# TC-05: Di chuyen xuong
+# ==============================================
+#
+# INPUT BOARD:
+#   hang[0] = [    2,    4,    8,   16 ]
+#   hang[1] = [    0,    0,    0,    0 ]
+#   hang[2] = [    0,    0,    0,    0 ]
+#   hang[3] = [    0,    0,    0,    0 ]
+#
+# LENH NHAP (W=len, S=xuong, A=trai, D=phai, N=moi, Q=thoat):
+#   s
+#
+# EXPECTED OUTPUT BOARD:
+#   hang[0] = [    0,    0,    0,    0 ]
+#   hang[1] = [    0,    0,    0,    0 ]
+#   hang[2] = [    0,    0,    0,    0 ]
+#   hang[3] = [    2,    4,    8,   16 ]
+#
+# SCORE DELTA: +0
+# GHI CHU: Hang 0 truot xuong hang 3
+# ==============================================
+
+# --- BOARD KHOI TAO (set vao game->bang truoc khi chay) ---
+INIT 0 0 2
+INIT 0 1 4
+INIT 0 2 8
+INIT 0 3 16
+
+# --- CAC PHIM NHAP ---
+s
+
+# --- KET THUC TEST ---
+q

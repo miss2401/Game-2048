@@ -1,0 +1,37 @@
+# TC-08: Gop nhieu hang cung luc
+# ==============================================
+#
+# INPUT BOARD:
+#   hang[0] = [    2,    2,    0,    0 ]
+#   hang[1] = [    4,    4,    0,    0 ]
+#   hang[2] = [    8,    8,    0,    0 ]
+#   hang[3] = [   16,   16,    0,    0 ]
+#
+# LENH NHAP (W=len, S=xuong, A=trai, D=phai, N=moi, Q=thoat):
+#   a
+#
+# EXPECTED OUTPUT BOARD:
+#   hang[0] = [    4,    0,    0,    0 ]
+#   hang[1] = [    8,    0,    0,    0 ]
+#   hang[2] = [   16,    0,    0,    0 ]
+#   hang[3] = [   32,    0,    0,    0 ]
+#
+# SCORE DELTA: +60
+# GHI CHU: 4 hang deu gop, tong diem +4+8+16+32=60
+# ==============================================
+
+# --- BOARD KHOI TAO (set vao game->bang truoc khi chay) ---
+INIT 0 0 2
+INIT 0 1 2
+INIT 1 0 4
+INIT 1 1 4
+INIT 2 0 8
+INIT 2 1 8
+INIT 3 0 16
+INIT 3 1 16
+
+# --- CAC PHIM NHAP ---
+a
+
+# --- KET THUC TEST ---
+q

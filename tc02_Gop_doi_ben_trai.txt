@@ -1,0 +1,31 @@
+# TC-02: Gop doi ben trai
+# ==============================================
+#
+# INPUT BOARD:
+#   hang[0] = [    2,    2,    0,    0 ]
+#   hang[1] = [    0,    0,    0,    0 ]
+#   hang[2] = [    0,    0,    0,    0 ]
+#   hang[3] = [    0,    0,    0,    0 ]
+#
+# LENH NHAP (W=len, S=xuong, A=trai, D=phai, N=moi, Q=thoat):
+#   a
+#
+# EXPECTED OUTPUT BOARD:
+#   hang[0] = [    4,    0,    0,    0 ]
+#   hang[1] = [    0,    0,    0,    0 ]
+#   hang[2] = [    0,    0,    0,    0 ]
+#   hang[3] = [    0,    0,    0,    0 ]
+#
+# SCORE DELTA: +4
+# GHI CHU: Hai so 2 gop thanh 4, cong 4 diem
+# ==============================================
+
+# --- BOARD KHOI TAO (set vao game->bang truoc khi chay) ---
+INIT 0 0 2
+INIT 0 1 2
+
+# --- CAC PHIM NHAP ---
+a
+
+# --- KET THUC TEST ---
+q

@@ -1,0 +1,33 @@
+# TC-04: Di chuyen phai - khong gop
+# ==============================================
+#
+# INPUT BOARD:
+#   hang[0] = [    2,    0,    0,    0 ]
+#   hang[1] = [    0,    4,    0,    0 ]
+#   hang[2] = [    0,    0,    8,    0 ]
+#   hang[3] = [    0,    0,    0,    2 ]
+#
+# LENH NHAP (W=len, S=xuong, A=trai, D=phai, N=moi, Q=thoat):
+#   d
+#
+# EXPECTED OUTPUT BOARD:
+#   hang[0] = [    0,    0,    0,    2 ]
+#   hang[1] = [    0,    0,    0,    4 ]
+#   hang[2] = [    0,    0,    0,    8 ]
+#   hang[3] = [    0,    0,    0,    2 ]
+#
+# SCORE DELTA: +0
+# GHI CHU: Tat ca don ve cot 3, khong gop
+# ==============================================
+
+# --- BOARD KHOI TAO (set vao game->bang truoc khi chay) ---
+INIT 0 0 2
+INIT 1 1 4
+INIT 2 2 8
+INIT 3 3 2
+
+# --- CAC PHIM NHAP ---
+d
+
+# --- KET THUC TEST ---
+q
