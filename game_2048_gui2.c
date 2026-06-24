@@ -30,9 +30,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-/* =========================================================
-   HANG SO
-   ========================================================= */
 #define WINDOW_WIDTH   620
 #define WINDOW_HEIGHT  720
 #define bang_SIZE      4
@@ -41,12 +38,6 @@
 #define BOARD_OFFSET_X ((WINDOW_WIDTH - (CELL_SIZE * bang_SIZE + CELL_MARGIN * (bang_SIZE + 1))) / 2)
 #define BOARD_OFFSET_Y 180
 
-/* Toc do tu dong: ms giua moi lenh (tang len neu muon xem ro hon) */
-#define AUTO_STEP_DELAY_MS 700
-
-/* =========================================================
-   MAU SAC
-   ========================================================= */
 typedef struct { Uint8 r, g, b; } Color;
 
 Color COLORS[] = {
@@ -78,9 +69,6 @@ Color get_text_color(int value) {
     return TEXT_LIGHT;
 }
 
-/* =========================================================
-   CAU TRUC GAME
-   ========================================================= */
 typedef struct game {
     int    bang[bang_SIZE][bang_SIZE];
     int    current_score;
@@ -103,17 +91,11 @@ typedef struct game {
     int    auto_done;
 } Game;
 
-/* =========================================================
-   TIEN KHAI BAO
-   ========================================================= */
 void draw_header(Game* game);
 void draw_board(Game* game);
 void render(Game* game);
 void cleanup(Game* game);
 
-/* =========================================================
-   KHOI TAO SDL
-   ========================================================= */
 int init_sdl(Game* game) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL_Init Error: %s\n", SDL_GetError());
@@ -138,9 +120,6 @@ int init_sdl(Game* game) {
     return 1;
 }
 
-/* =========================================================
-   LOAD FONT
-   ========================================================= */
 int load_fonts(Game* game) {
     const char* fonts[] = {
         "C:\\Windows\\Fonts\\arial.ttf",
@@ -162,9 +141,6 @@ int load_fonts(Game* game) {
     return 0;
 }
 
-/* =========================================================
-   LOGIC GAME
-   ========================================================= */
 int dichHang[] = { 1,  0, -1,  0};
 int dichCot[]  = { 0,  1,  0, -1};
 
@@ -276,9 +252,7 @@ int checkWin(Game* game) {
             if (game->bang[i][j] == 2048) return 1;
     return 0;
 }
-/* =========================================================
-   IN BANG RA TERMINAL (cho che do tu dong)
-   ========================================================= */
+
 void print_board(Game* game) {
     printf("  +------+------+------+------+\n");
     for (int i = 0; i < 4; i++) {
@@ -294,16 +268,6 @@ void print_board(Game* game) {
     printf("  Score: %d   Best: %d\n", game->current_score, game->best_score);
 }
 
-/* =========================================================
-   DOC LENH TU FILE
-   
-   Tra ve:
-     SDLK_w / s / a / d  — lenh di chuyen
-     SDLK_n              — new game
-     SDLK_q              — thoat
-     -2                  — da xu ly INIT / BEGIN / comment (doc tiep)
-     -1                  — het file
-   ========================================================= */
 int doc_lenh_tiep_theo(Game* game) {
     if (!game->input_file) return -1;
 
@@ -327,7 +291,6 @@ int doc_lenh_tiep_theo(Game* game) {
             return -2; 
         }
 
-        /* ---- BEGIN_TEST <id> ---- */
         if (strncmp(line, "BEGIN_TEST", 10) == 0) {
             game->test_index++;
             /* Lay ten test id (phan sau "BEGIN_TEST ") */
@@ -375,7 +338,6 @@ int doc_lenh_tiep_theo(Game* game) {
             return -2;
         }
 
-        /* ---- Phim di chuyen ---- */
         char ch = (char)tolower((unsigned char)line[0]);
         if (ch == 'w') { printf("[AUTO] [%s] Lenh: W (len)\n",   game->cur_test_id); return SDLK_w; }
         if (ch == 's') { printf("[AUTO] [%s] Lenh: S (xuong)\n", game->cur_test_id); return SDLK_s; }
@@ -387,7 +349,6 @@ int doc_lenh_tiep_theo(Game* game) {
         printf("[AUTO] Dong khong nhan dang duoc: '%s'\n", line);
     }
 
-    /* Het file */
     printf("\n[AUTO] Da chay xong %d test case(s).\n", game->test_index);
     printf("[AUTO] Nhan Q hoac dong cua so de thoat.\n");
     fclose(game->input_file);
@@ -400,9 +361,6 @@ int doc_lenh_tiep_theo(Game* game) {
     return -1;   /* khong tra SDLK_q, giu man hinh lai */
 }
 
-/* =========================================================
-   XU LY PHIM (dung chung cho ca 2 che do)
-   ========================================================= */
 void xu_ly_phim(Game* game, SDL_Keycode sym, int* running) {
     switch (sym) {
         case SDLK_q: case SDLK_ESCAPE:
@@ -436,9 +394,6 @@ void xu_ly_phim(Game* game, SDL_Keycode sym, int* running) {
     }
 }
 
-/* =========================================================
-   MAIN
-   ========================================================= */
 int main(int argc, char* argv[]) {
     Game game = {0};
 
@@ -456,7 +411,6 @@ int main(int argc, char* argv[]) {
             printf("[AUTO] ====================================\n");
             game.auto_delay_ms = AUTO_STEP_DELAY_MS;
 
-            /* Che do tu dong: bat dau voi bang trong */
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                     game.bang[i][j] = 0;
@@ -467,7 +421,6 @@ int main(int argc, char* argv[]) {
             newGame(&game);
         }
     } else {
-        /* Che do tay binh thuong */
         newGame(&game);
     }
 
@@ -477,7 +430,7 @@ int main(int argc, char* argv[]) {
     SDL_Event event;
 
     while (running) {
-        /* --- Xu ly event nguoi dung --- */
+
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = 0;
@@ -513,9 +466,6 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-/* =========================================================
-   VE GIAO DIEN
-   ========================================================= */
 void draw_text_centered(Game* game, const char* text,
                         int x, int y, int w, int h,
                         TTF_Font* font, Color c)
